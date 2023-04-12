@@ -19,7 +19,7 @@ dependencies {
 
     //Mockito
     testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
-
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.12.4'
 }
 
 test {
