@@ -1,4 +1,4 @@
-package split;
+package split.gettingstart;
 
 import java.util.ArrayList;
 import java.util.HashMap;

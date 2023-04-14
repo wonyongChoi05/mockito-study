@@ -1,4 +1,4 @@
-package split;
+package split.gettingstart;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;

@@ -1,4 +1,4 @@
-package split;
+package split.gettingstart;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -93,7 +93,7 @@ public class MockTest {
      Unnecessary stubbings detected.
      Clean & maintainable test code requires zero unnecessary code.
      Following stubbings are unnecessary (click to navigate to relevant line of code):
-     1. -> at split.MockTest.whenMockitoAnnotationsUninitialized_thenNPEThrown(MockTest.java:85)
+     1. -> at split.gettingstart.MockTest.whenMockitoAnnotationsUninitialized_thenNPEThrown(MockTest.java:85)
      Please remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.
     */
 }
