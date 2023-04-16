@@ -21,6 +21,7 @@ public class SpyTest {
     @Test
     public void testSpyWithoutStubbingWithoutAnnotation() {
         final MockFixture mockFixture = Mockito.spy(MockFixture.class);
+
         Assertions.assertThat(mockFixture.getName()).isEqualTo("name");
     }
 
@@ -31,6 +32,7 @@ public class SpyTest {
         final String beforeStubbing = mockFixture.getName();
         when(mockFixture.getName()).thenReturn("stubbing");
         final String afterStubbing = mockFixture.getName();
+
         Assertions.assertThat(beforeStubbing).isEqualTo("name");
         Assertions.assertThat(afterStubbing).isEqualTo("stubbing");
     }
@@ -47,6 +49,7 @@ public class SpyTest {
         final String beforeStubbing = spyName.getName();
         when(spyName.getName()).thenReturn("stubbing");
         final String afterStubbing = spyName.getName();
+
         Assertions.assertThat(beforeStubbing).isEqualTo("name");
         Assertions.assertThat(afterStubbing).isEqualTo("stubbing");
     }

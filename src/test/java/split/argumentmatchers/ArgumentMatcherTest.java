@@ -20,7 +20,7 @@ public class ArgumentMatcherTest {
     @Mock
     private ArgumentTestFixture argumentTestFixture;
 
-    @DisplayName("인자에 anyString() 을 사용할 경우 어느 int 가 와도 같은 결과로 stubbing 된다.")
+    @DisplayName("인자에 anyString() 을 사용할 경우 어느 string 이 와도 같은 결과로 stubbing 된다.")
     @Test
     void useArgumentMatcherAnyInt() {
         when(argumentTestFixture.parseToEnglish(anyString())).thenReturn("one");

@@ -38,7 +38,9 @@ public class MethodsTest {
     void answerFalse() {
         final MockList mockedList = mock(MockList.class, new FalseAnswerFixture());
         final boolean addResult = mockedList.add(anyString());
+
         verify(mockedList).add(anyString());
+
         Assertions.assertThat(addResult).isFalse();
     }
 
@@ -47,7 +49,9 @@ public class MethodsTest {
     void answerTrue() {
         final MockList mockedList = mock(MockList.class, new TrueAnswerFixture());
         final boolean addResult = mockedList.add(anyString());
+
         verify(mockedList).add(anyString());
+
         Assertions.assertThat(addResult).isTrue();
     }
 

@@ -25,8 +25,11 @@ public class CaptorTest {
     public void useArgumentCaptorOnce() {
         final List<String> mockList = mock(List.class);
         final ArgumentCaptor<String> args = ArgumentCaptor.forClass(String.class);
+
         mockList.add("first");
+
         verify(mockList).add(args.capture());
+
         Assertions.assertThat(args.getValue()).isEqualTo("first");
     }
 
@@ -35,9 +38,12 @@ public class CaptorTest {
     public void useArgumentCaptorMany() {
         final List<String> mockList = mock(List.class);
         final ArgumentCaptor<String> args = ArgumentCaptor.forClass(String.class);
+
         mockList.add("first");
         mockList.add("second");
+
         verify(mockList, times(2)).add(args.capture());
+
         Assertions.assertThat(args.getAllValues()).containsExactly("first", "second");
     }
 
@@ -45,8 +51,11 @@ public class CaptorTest {
     @Test
     public void useAnnotationCaptorOnce() {
         final List<String> mockList = mock(List.class);
+
         mockList.add("first");
+
         verify(mockList).add(argumentCaptor.capture());
+
         Assertions.assertThat(argumentCaptor.getValue()).isEqualTo("first");
     }
 
@@ -54,9 +63,12 @@ public class CaptorTest {
     @Test
     public void useAnnotationCaptorMany() {
         final List<String> mockList = mock(List.class);
+
         mockList.add("first");
         mockList.add("second");
+
         verify(mockList, times(2)).add(argumentCaptor.capture());
+
         Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly("first", "second");
     }
 }

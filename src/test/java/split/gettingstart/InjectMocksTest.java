@@ -58,6 +58,7 @@ public class InjectMocksTest {
     public void test() {
         final String putKey = "one";
         final String putValue = "oneValue";
+
         when(mockMap.get(putKey)).thenReturn(putValue);
         final String mockResult = mockMap.get(putKey);
 

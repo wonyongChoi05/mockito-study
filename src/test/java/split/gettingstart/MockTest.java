@@ -24,6 +24,7 @@ public class MockTest {
     @Test
     public void mockObjectCanNotTestWithoutStubbingMockAnnotation() {
         final String result = mockFixture.getName();
+
         Assertions.assertThat(result).isNotEqualTo("name");
     }
 
@@ -32,6 +33,7 @@ public class MockTest {
     public void mockObjectCanNotTestWithoutStubbing() {
         final MockFixture mock = mock(MockFixture.class);
         final String result = mock.getName();
+
         Assertions.assertThat(result).isNotEqualTo("name");
     }
 
@@ -63,6 +65,7 @@ public class MockTest {
     @Test
     public void verifyMethodOnce() {
         mockFixture.getName();
+
         verify(mockFixture).getName();
     }
 
@@ -73,6 +76,7 @@ public class MockTest {
         mockFixture.getName();
         mockFixture.getName();
         mockFixture.getName();
+
         verify(mockFixture, times(4)).getName();
     }
 
