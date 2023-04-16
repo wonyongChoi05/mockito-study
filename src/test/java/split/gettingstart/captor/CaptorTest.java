@@ -1,4 +1,4 @@
-package split.gettingstart;
+package split.gettingstart.captor;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -70,6 +70,24 @@ public class CaptorTest {
         verify(mockList, times(2)).add(argumentCaptor.capture());
 
         Assertions.assertThat(argumentCaptor.getAllValues()).containsExactly("first", "second");
+    }
+
+    @DisplayName("내부 동작의 인자또한 ArgumentCaptor 로 캡쳐할 수 있다.")
+    @Test
+    void captureInnerParameter() {
+        //given
+        final CaptorInnerFixture innerFixture = mock(CaptorInnerFixture.class);
+        final CaptorOuterFixture captorOuterFixture = new CaptorOuterFixture(innerFixture);
+        final ArgumentCaptor<CaptorMessageFixture> messageCaptor = ArgumentCaptor.forClass(CaptorMessageFixture.class);
+
+        //when
+        captorOuterFixture.show("메시지", 1, true);
+        //내부적으로 CaptorMessageFixture 를 생성하고 인자로 넘겨 CaptorInnerFixture 의 print() 를 호출한다
+
+        //then
+        verify(innerFixture).print(messageCaptor.capture());
+        final CaptorMessageFixture message = messageCaptor.getValue();
+        Assertions.assertThat(message.getName()).isEqualTo("메시지");
     }
 }
 
