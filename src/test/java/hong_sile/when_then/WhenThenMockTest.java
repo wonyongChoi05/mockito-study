@@ -68,7 +68,7 @@ public class WhenThenMockTest {
 
     @Test
     @DisplayName("반환값이 존재하는 메서드에 여러개의 반환값을 stubbing - chaining")
-    void whenConfigNonVoidReturnMethodStubMultiValue() {
+    void whenConfigNonVoidReturnMethodStubMultiValue1() {
         List<Integer> listMock = mock(List.class);
         when(listMock.get(anyInt()))
                 .thenReturn(STUB_RETURN_VALUE)
@@ -76,6 +76,24 @@ public class WhenThenMockTest {
 
         assertThat(listMock.get(SECURE_RANDOM.nextInt()))
                 .isEqualTo(STUB_RETURN_VALUE);
+        assertThatThrownBy(() -> listMock.get(SECURE_RANDOM.nextInt()))
+                .isInstanceOf(CustomException.class);
+    }
+
+    @Test
+    @DisplayName("반환값이 존재하는 메서드에 여러개의 반환값을 stubbing - chaining 설정값보다 더 많이 호출할 때")
+    void whenConfigNonVoidReturnMethodStubMultiValue2() {
+        List<Integer> listMock = mock(List.class);
+        when(listMock.get(anyInt()))
+                .thenReturn(STUB_RETURN_VALUE)
+                .thenThrow(CustomException.class);
+
+        assertThat(listMock.get(SECURE_RANDOM.nextInt()))
+                .isEqualTo(STUB_RETURN_VALUE);
+        assertThatThrownBy(() -> listMock.get(SECURE_RANDOM.nextInt()))
+                .isInstanceOf(CustomException.class);
+        assertThatThrownBy(() -> listMock.get(SECURE_RANDOM.nextInt()))
+                .isInstanceOf(CustomException.class);
         assertThatThrownBy(() -> listMock.get(SECURE_RANDOM.nextInt()))
                 .isInstanceOf(CustomException.class);
     }
