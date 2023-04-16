@@ -3,6 +3,7 @@ package hong_sile.when_then;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -10,6 +11,7 @@ import static org.mockito.Mockito.when;
 
 import hong_sile.exception.CustomException;
 import java.security.SecureRandom;
+import java.util.AbstractList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -76,5 +78,43 @@ public class WhenThenMockTest {
                 .isEqualTo(STUB_RETURN_VALUE);
         assertThatThrownBy(() -> listMock.get(SECURE_RANDOM.nextInt()))
                 .isInstanceOf(CustomException.class);
+    }
+
+    @Test
+    @DisplayName("Mock 객체의 실제 메서드 호출")
+    void whenConfigCallRealMethod() {
+        final TestList listMock = mock(TestList.class);
+
+        when(listMock.size()).thenCallRealMethod();
+
+        assertThat(listMock.size())
+                .isEqualTo(TestList.CUSTOM_SIZE);
+    }
+
+    @Test
+    @DisplayName("메서드에 Custom Answer 지정")
+    void whenConfigMethodCustomAnswer() {
+        final int randomArgument = SECURE_RANDOM.nextInt();
+        List<Integer> listMock = mock(List.class);
+        doAnswer(invocation -> invocation.getArgument(0)).when(listMock).get(anyInt());
+
+        final Integer returnValue = listMock.get(randomArgument);
+        assertThat(returnValue)
+                .isEqualTo(randomArgument);
+    }
+
+    static class TestList extends AbstractList<Integer> {
+
+        public static final int CUSTOM_SIZE = 20;
+
+        @Override
+        public Integer get(final int index) {
+            return -1;
+        }
+
+        @Override
+        public int size() {
+            return CUSTOM_SIZE;
+        }
     }
 }
