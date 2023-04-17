@@ -1,4 +1,4 @@
-package split.gettingstart;
+package gettingstart;
 
 class MockFixture {
 

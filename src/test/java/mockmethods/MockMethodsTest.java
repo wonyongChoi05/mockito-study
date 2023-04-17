@@ -1,4 +1,4 @@
-package split.mockmethods;
+package mockmethods;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -17,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @DisplayName("Mock 메서드 테스트")
 @ExtendWith(MockitoExtension.class)
-public class MethodsTest {
+public class MockMethodsTest {
 
     @DisplayName("Mock 의 이름을 커스텀하면 오류 메시지에 해당이름이 사용된다.")
     @Test
@@ -28,9 +28,9 @@ public class MethodsTest {
         mockedList.add(anyString());
 
         Assertions.assertThatThrownBy(() ->
-                verify(mockedList, times(2)).add(anyString()))
-            .isInstanceOf(TooFewActualInvocations.class)
-            .hasMessageContaining("customName.add");
+                        verify(mockedList, times(2)).add(anyString()))
+                .isInstanceOf(TooFewActualInvocations.class)
+                .hasMessageContaining("customName.add");
     }
 
     @DisplayName("Answer 인터페이스를 사용하여 when,thenReturn 없이 스터빙이 가능하다 ( false )")

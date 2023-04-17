@@ -1,4 +1,4 @@
-package hong_sile.exception;
+package exception;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.doThrow;

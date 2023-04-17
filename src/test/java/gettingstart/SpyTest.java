@@ -1,4 +1,4 @@
-package split.gettingstart;
+package gettingstart;
 
 import static org.mockito.Mockito.when;
 

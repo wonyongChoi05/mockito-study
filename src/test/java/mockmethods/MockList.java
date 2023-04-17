@@ -1,4 +1,4 @@
-package split.mockmethods;
+package mockmethods;
 
 import java.util.AbstractList;
 

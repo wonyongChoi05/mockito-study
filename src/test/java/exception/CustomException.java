@@ -1,4 +1,4 @@
-package hong_sile.exception;
+package exception;
 
 public class CustomException extends RuntimeException {
 

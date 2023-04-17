@@ -1,4 +1,4 @@
-package split.gettingstart.captor;
+package gettingstart.captor;
 
 public class CaptorMessageFixture {
 

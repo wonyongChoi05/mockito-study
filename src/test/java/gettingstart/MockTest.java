@@ -1,16 +1,20 @@
-package split.gettingstart;
+package gettingstart;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import domain.Car;
+import domain.Name;
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @DisplayName("Mock 테스트")
@@ -25,16 +29,16 @@ public class MockTest {
     public void mockObjectCanNotTestWithoutStubbingMockAnnotation() {
         final String result = mockFixture.getName();
 
-        Assertions.assertThat(result).isNotEqualTo("name");
+        assertThat(result).isNotEqualTo("name");
     }
 
     @DisplayName("목 객체는 스터빙 없이는 정상 테스트가 불가하다. ( Mockito.mock() 사용 )")
     @Test
     public void mockObjectCanNotTestWithoutStubbing() {
-        final MockFixture mock = mock(MockFixture.class);
+        final MockFixture mock = Mockito.mock(MockFixture.class);
         final String result = mock.getName();
 
-        Assertions.assertThat(result).isNotEqualTo("name");
+        assertThat(result).isNotEqualTo("name");
     }
 
     @DisplayName("목 객체를 스터빙하여 테스트한다. ( @Mock 사용 )")
@@ -45,20 +49,20 @@ public class MockTest {
         // 테스트 코드 실행
         final String nameWithMockAnnotationNameResult = mockFixture.getName();
         // 결과 검증
-        Assertions.assertThat("stubbing").isEqualTo(nameWithMockAnnotationNameResult);
+        assertThat("stubbing").isEqualTo(nameWithMockAnnotationNameResult);
     }
 
     @DisplayName("목 객체를 스터빙하여 테스트한다. ( Mockito.mock() 사용 )")
     @Test
     public void testMockWithStubbing() {
         // Mock 객체 생성
-        MockFixture mock = mock(MockFixture.class);
+        MockFixture mock = Mockito.mock(MockFixture.class);
         // Mock 객체에 대한 기대 설정
         when(mock.getName()).thenReturn("stubbing");
         // 테스트 코드 실행
         String mockResult = mock.getName();
         // 결과 검증
-        Assertions.assertThat("stubbing").isEqualTo(mockResult);
+        assertThat("stubbing").isEqualTo(mockResult);
     }
 
     @DisplayName("메서드 호출 횟수를 검증한다 ( 한번 )")
@@ -100,5 +104,52 @@ public class MockTest {
      1. -> at split.gettingstart.MockTest.whenMockitoAnnotationsUninitialized_thenNPEThrown(MockTest.java:85)
      Please remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.
     */
+    @DisplayName("stubbing을 한 값은 false 하지 않은 값도 false")
+    @Test
+    void non_stubbing_test() {
+        // given
+        List<String> mockedList = mock(List.class);
+
+        // when
+        final boolean stubbingResult = mockedList.add("a");
+        final boolean nonStubbingResult = mockedList.add("b");
+
+        // then
+        assertAll(
+                () -> assertThat(stubbingResult).isFalse(),
+                () -> assertThat(nonStubbingResult).isFalse()
+        );
+    }
+
+    @DisplayName("stubbing을 한 값은 true 하지 않은 값은 false")
+    @Test
+    void mocked_list_test() {
+        // given
+        List<String> mockedList = mock(List.class);
+        when(mockedList.add("a")).thenReturn(true);
+
+        // when
+        final boolean stubbingResult = mockedList.add("a");
+        final boolean nonStubbingResult = mockedList.add("b");
+
+        // then
+        assertAll(
+                () -> assertThat(stubbingResult).isTrue(),
+                () -> assertThat(nonStubbingResult).isFalse()
+        );
+    }
+
+    @DisplayName("반환 타입이 객체인 값을 stubbing 할 수 있다.")
+    @Test
+    void returnType_object_value_stubbing() {
+        // given
+        Car car = Mockito.mock(Car.class);
+
+        // when
+        when(car.getName()).thenReturn(new Name("bebe"));
+
+        // then
+        assertThat(car.getName()).isEqualTo(new Name("bebe"));
+    }
 }
 

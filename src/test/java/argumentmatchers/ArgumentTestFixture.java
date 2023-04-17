@@ -1,4 +1,4 @@
-package split.argumentmatchers;
+package argumentmatchers;
 
 public class ArgumentTestFixture {
 
