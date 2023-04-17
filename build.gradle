@@ -21,7 +21,6 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
 
     //Mockito
-    testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.2.0'
 }
 
