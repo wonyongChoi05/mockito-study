@@ -1,8 +1,21 @@
 # mockito-study
+
 ## References
+
 프롤로그 근로팀 Mockito + JUnit을 이용한 테스트 작성 방식 문서화
 
 * Maven Repository : https://mvnrepository.com/search?q=mockito
 * Mockito Framework Site : https://site.mockito.org/
-* Baeldug Mockito tutorial : https://www.baeldung.com/mockito-series 
+* Baeldung Mockito tutorial : https://www.baeldung.com/mockito-series
 * Mockito란? Mockito 사용하기: https://scshim.tistory.com/439
+
+## 4/12 (수)
+
+- Mockito 가 무엇인지 파악
+- mockito dependency 추가
+- Baeldung 에서 각자 공부 파트 배분
+
+## 4/14 (금)
+
+- 공부한 부분 발표, 정리
+- 위키에 작성할 내용 정리용 공유 노션 생성
